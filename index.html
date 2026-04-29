@@ -8,15 +8,9 @@
 <style>
   :root {
     --deep: #05030f;
-    --night: #0d0820;
-    --dark: #130c2e;
-    --mid: #1e1248;
     --gold: #c9a84c;
     --gold-light: #e8c97a;
     --gold-dim: #7a6230;
-    --silver: #a8b4c8;
-    --rose: #9b4f6e;
-    --teal: #2a7a8a;
     --text: #d4c8f0;
     --text-dim: #8878b0;
     --card-back: #12093a;
@@ -33,10 +27,8 @@
     font-family: 'Noto Serif TC', serif;
     min-height: 100vh;
     overflow-x: hidden;
-    position: relative;
   }
 
-  /* Starfield */
   #stars-canvas {
     position: fixed;
     top: 0; left: 0;
@@ -59,68 +51,45 @@
     text-align: center;
     padding: 36px 0 24px;
   }
-
   .header-sigil {
-    font-size: 2.4rem;
+    font-size: 2rem;
     letter-spacing: 0.3em;
     color: var(--gold);
-    text-shadow: 0 0 30px var(--glow-strong), 0 0 60px var(--glow);
     animation: breathe 4s ease-in-out infinite;
     margin-bottom: 6px;
     display: block;
   }
-
   @keyframes breathe {
-    0%, 100% { opacity: 0.85; text-shadow: 0 0 20px var(--glow), 0 0 40px rgba(201,168,76,0.2); }
+    0%,100% { opacity: 0.8; text-shadow: 0 0 20px var(--glow); }
     50% { opacity: 1; text-shadow: 0 0 40px var(--glow-strong), 0 0 80px var(--glow); }
   }
-
   .header h1 {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.3rem, 5vw, 2rem);
+    font-size: clamp(1.3rem, 5vw, 1.9rem);
     color: var(--gold-light);
     letter-spacing: 0.15em;
     text-shadow: 0 0 20px var(--glow);
     margin-bottom: 6px;
   }
-
   .header-sub {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--text-dim);
     letter-spacing: 0.3em;
     font-weight: 300;
   }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-    opacity: 0.4;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold));
-  }
-  .divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
-  .divider span { color: var(--gold); font-size: 0.9rem; }
 
   /* Section Card */
   .section-card {
     background: linear-gradient(135deg, rgba(19,12,46,0.95), rgba(13,8,32,0.98));
     border: 1px solid rgba(201,168,76,0.2);
     border-radius: 16px;
-    padding: 22px 20px;
-    margin-bottom: 18px;
-    backdrop-filter: blur(10px);
+    padding: 20px 18px;
+    margin-bottom: 16px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.1);
   }
-
   .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: var(--gold-dim);
     letter-spacing: 0.4em;
     text-transform: uppercase;
@@ -134,172 +103,143 @@
     flex: 1;
     height: 1px;
     background: linear-gradient(to right, var(--gold-dim), transparent);
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
-  /* Question Input */
-  .question-label {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    margin-bottom: 10px;
-    display: block;
-  }
-
+  /* Question */
   textarea#question {
     width: 100%;
     background: rgba(5,3,15,0.7);
-    border: 1px solid rgba(201,168,76,0.25);
+    border: 1px solid rgba(201,168,76,0.22);
     border-radius: 10px;
     color: var(--text);
     font-family: 'Noto Serif TC', serif;
     font-size: 0.95rem;
-    line-height: 1.7;
-    padding: 14px 16px;
+    line-height: 1.75;
+    padding: 13px 15px;
     resize: none;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
-    min-height: 90px;
+    min-height: 80px;
   }
-  textarea#question::placeholder { color: var(--text-dim); opacity: 0.5; }
+  textarea#question::placeholder { color: var(--text-dim); opacity: 0.45; }
   textarea#question:focus {
-    border-color: rgba(201,168,76,0.5);
-    box-shadow: 0 0 20px rgba(201,168,76,0.1);
+    border-color: rgba(201,168,76,0.45);
+    box-shadow: 0 0 18px rgba(201,168,76,0.08);
   }
 
   /* Count Selector */
   .count-selector {
     display: flex;
-    gap: 12px;
-    margin-top: 4px;
+    gap: 10px;
   }
-
   .count-btn {
     flex: 1;
     background: transparent;
-    border: 1px solid rgba(201,168,76,0.25);
+    border: 1px solid rgba(201,168,76,0.22);
     border-radius: 10px;
     color: var(--text-dim);
     font-family: 'Noto Serif TC', serif;
-    font-size: 0.9rem;
-    padding: 12px 8px;
+    padding: 11px 6px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
-    line-height: 1.4;
   }
-  .count-btn .count-num {
+  .count-btn .n {
     font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--gold-dim);
     display: block;
-    transition: all 0.3s;
+    transition: color 0.3s;
+    line-height: 1.1;
   }
-  .count-btn .count-desc {
-    font-size: 0.7rem;
-    opacity: 0.6;
+  .count-btn .d {
+    font-size: 0.65rem;
+    opacity: 0.55;
     display: block;
-    margin-top: 2px;
+    margin-top: 3px;
+    letter-spacing: 0.05em;
   }
-  .count-btn:hover { border-color: rgba(201,168,76,0.45); }
   .count-btn.active {
-    background: rgba(201,168,76,0.08);
+    background: rgba(201,168,76,0.07);
     border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(201,168,76,0.15);
+    box-shadow: 0 0 18px rgba(201,168,76,0.12);
   }
-  .count-btn.active .count-num { color: var(--gold-light); }
-  .count-btn.active .count-desc { opacity: 0.9; }
+  .count-btn.active .n { color: var(--gold-light); }
+  .count-btn.active .d { opacity: 0.85; color: var(--text); }
 
   /* Draw Button */
   .draw-btn {
     width: 100%;
-    background: linear-gradient(135deg, #8a6520, #c9a84c, #8a6520);
+    background: linear-gradient(135deg, #7a5818, #c9a84c, #7a5818);
     background-size: 200% 100%;
     border: none;
     border-radius: 12px;
-    color: var(--deep);
+    color: #1a0e00;
     font-family: 'Cinzel', serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.25em;
-    padding: 16px;
+    letter-spacing: 0.28em;
+    padding: 15px;
     cursor: pointer;
     transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-    margin-top: 18px;
-    text-transform: uppercase;
+    margin-top: 14px;
   }
-  .draw-btn::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .draw-btn:hover::before { opacity: 1; }
-  .draw-btn:hover { background-position: 100% 0; box-shadow: 0 6px 30px rgba(201,168,76,0.4); }
-  .draw-btn:active { transform: scale(0.98); }
-  .draw-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
-  }
+  .draw-btn:hover { background-position: 100% 0; box-shadow: 0 6px 28px rgba(201,168,76,0.38); }
+  .draw-btn:active { transform: scale(0.985); }
+  .draw-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; transform: none; }
 
-  /* Spread Area */
-  .spread-container {
-    display: none;
-    animation: fadeIn 0.6s ease;
+  /* Loading */
+  .drawing-animation { text-align: center; padding: 28px; display: none; }
+  .drawing-animation.visible { display: block; }
+  .drawing-orb {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-dim);
+    border-top-color: var(--gold);
+    animation: spin 1s linear infinite;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 18px var(--glow);
   }
-  .spread-container.visible { display: block; }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
-
-  .spread-title {
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .drawing-text {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--gold-dim);
-    letter-spacing: 0.35em;
-    text-align: center;
-    margin-bottom: 20px;
-    opacity: 0.8;
+    letter-spacing: 0.3em;
+    animation: pulse 1.5s ease-in-out infinite;
   }
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-  /* Cards Grid */
+  /* Cards */
+  .spread-container { display: none; animation: fadeIn 0.5s ease; }
+  .spread-container.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+
   .cards-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 10px;
     justify-content: center;
-    margin-bottom: 22px;
   }
 
+  /* Card sizing: 3 per row for 3-card, 5-card */
   .card-slot {
-    width: calc(33.33% - 10px);
-    max-width: 160px;
-    aspect-ratio: 2/3.5;
-    perspective: 1000px;
+    width: calc(33.33% - 8px);
+    max-width: 150px;
+    aspect-ratio: 5/8;
+    perspective: 900px;
   }
-
   .cards-grid.five-cards .card-slot {
-    width: calc(20% - 12px);
+    width: calc(20% - 9px);
     max-width: 110px;
-  }
-
-  @media (max-width: 400px) {
-    .card-slot { width: calc(33.33% - 9px); }
-    .cards-grid.five-cards .card-slot { width: calc(20% - 10px); }
   }
 
   .card-inner {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: default;
+    transition: transform 0.75s cubic-bezier(0.4,0,0.2,1);
   }
   .card-inner.flipped { transform: rotateY(180deg); }
 
@@ -307,357 +247,164 @@
     position: absolute;
     inset: 0;
     backface-visibility: hidden;
-    border-radius: 10px;
+    border-radius: 9px;
     overflow: hidden;
   }
 
+  /* Back */
   .card-back {
     background: var(--card-back);
-    border: 1px solid rgba(201,168,76,0.4);
+    border: 1px solid rgba(201,168,76,0.32);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.08);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.5);
   }
-
-  .card-back-design {
-    width: 85%;
-    height: 85%;
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .card-back-inner {
+    width: 82%; height: 82%;
+    border: 1px solid rgba(201,168,76,0.22);
+    border-radius: 5px;
+    background: radial-gradient(ellipse at center, rgba(28,16,68,0.8), rgba(10,6,26,0.95));
+    display: flex; align-items: center; justify-content: center;
     position: relative;
-    background: radial-gradient(ellipse at center, rgba(30,18,72,0.8) 0%, rgba(12,8,30,0.9) 100%);
   }
-  .card-back-design::before {
-    content: '✦';
-    font-size: 1.6rem;
-    color: rgba(201,168,76,0.4);
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .card-back-design::after {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 4px;
+  .card-back-inner::before { content:'✦'; font-size:1.3rem; color:rgba(201,168,76,0.3); }
+  .card-back-inner::after {
+    content:''; position:absolute; inset:5px;
+    border: 1px solid rgba(201,168,76,0.1); border-radius:3px;
   }
 
-  /* Corner ornaments for card back */
-  .card-back-corner {
-    position: absolute;
-    font-size: 0.5rem;
-    color: rgba(201,168,76,0.5);
-    line-height: 1;
-  }
-  .card-back-corner.tl { top: 4px; left: 5px; }
-  .card-back-corner.tr { top: 4px; right: 5px; }
-  .card-back-corner.bl { bottom: 4px; left: 5px; }
-  .card-back-corner.br { bottom: 4px; right: 5px; }
-
+  /* Front */
   .card-front {
-    background: var(--card-front);
-    border: 1px solid rgba(201,168,76,0.35);
+    background: linear-gradient(160deg, #0d0928 0%, #07041a 100%);
+    border: 1px solid rgba(201,168,76,0.32);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 20px rgba(201,168,76,0.12);
-  }
-
-  .card-front.reversed .card-art-wrap { transform: rotate(180deg); }
-  .card-front.reversed { border-color: rgba(155, 79, 110, 0.5); }
-
-  .card-art-wrap {
-    flex: 1;
-    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 8px 4px;
-    transition: transform 0s;
-  }
-
-  .card-symbol {
-    font-size: clamp(1.6rem, 5vw, 2.4rem);
-    line-height: 1;
-    filter: drop-shadow(0 0 8px var(--glow));
-  }
-
-  .card-info {
-    padding: 5px 6px 7px;
+    padding: 10px 8px;
+    gap: 6px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.6);
     text-align: center;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    background: rgba(0,0,0,0.3);
-    flex-shrink: 0;
   }
+  .card-front.reversed { border-color: rgba(160,80,120,0.45); }
 
-  .card-number {
+  /* Corner ornament lines */
+  .card-front::before, .card-front::after {
+    content: '';
+    position: absolute;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  .card-front::before { inset: 5px; }
+
+  .card-suit {
     font-family: 'Cinzel', serif;
-    font-size: 0.52rem;
+    font-size: clamp(0.42rem, 1.3vw, 0.55rem);
     color: var(--gold-dim);
     letter-spacing: 0.15em;
-    display: block;
+    opacity: 0.8;
   }
-
-  .card-name {
-    font-size: clamp(0.58rem, 1.8vw, 0.72rem);
+  .card-num {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    color: rgba(201,168,76,0.5);
+    letter-spacing: 0.1em;
+  }
+  .card-name-text {
+    font-size: clamp(0.72rem, 2.2vw, 0.95rem);
     color: var(--gold-light);
-    font-weight: 500;
-    display: block;
-    line-height: 1.3;
-    margin-top: 2px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0.05em;
   }
-
-  .card-orientation {
-    font-size: 0.5rem;
-    margin-top: 2px;
-    display: block;
+  .card-en {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.38rem, 1.1vw, 0.48rem);
+    color: var(--text-dim);
     letter-spacing: 0.08em;
+    opacity: 0.6;
+    line-height: 1.3;
   }
-  .card-orientation.upright { color: rgba(168,210,196,0.8); }
-  .card-orientation.reversed { color: rgba(155,79,110,0.9); }
-
-  /* Reading Section */
-  .reading-section {
-    display: none;
-    animation: fadeIn 0.6s ease;
+  .card-orient {
+    font-size: clamp(0.45rem, 1.3vw, 0.55rem);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
   }
-  .reading-section.visible { display: block; }
+  .card-orient.up { color: rgba(150,210,185,0.85); }
+  .card-orient.rev { color: rgba(210,100,145,0.9); }
 
-  .reading-card {
-    background: linear-gradient(135deg, rgba(19,12,46,0.97), rgba(13,8,32,0.99));
-    border: 1px solid rgba(201,168,76,0.18);
-    border-radius: 14px;
-    padding: 20px 18px;
-    margin-bottom: 14px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-    animation: slideUp 0.5s ease backwards;
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; }
-  }
-
-  .reading-card-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .reading-card-icon {
-    width: 50px;
-    height: 70px;
-    background: var(--card-front);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 7px;
+  /* Reversed card: rotate content instead of border flip */
+  .card-front.reversed .card-content { transform: rotate(180deg); }
+  .card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 1.4rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  }
-  .reading-card-icon.rev { filter: saturate(0.7); border-color: rgba(155,79,110,0.4); }
-
-  .reading-card-icon-name {
-    font-size: 0.42rem;
-    color: var(--gold-dim);
-    text-align: center;
-    padding: 3px 2px 2px;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    line-height: 1.3;
-    font-family: 'Noto Serif TC', serif;
+    gap: 5px;
+    width: 100%;
   }
 
-  .reading-card-title {
-    flex: 1;
-  }
+  /* Action */
+  .action-area { display: none; animation: fadeIn 0.5s ease; }
+  .action-area.visible { display: block; }
 
-  .reading-pos-label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    color: var(--gold-dim);
-    letter-spacing: 0.3em;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .reading-card-name {
-    font-size: 1.1rem;
-    color: var(--gold-light);
-    font-weight: 700;
-    display: block;
-    line-height: 1.3;
-  }
-
-  .reading-card-orient {
-    font-size: 0.72rem;
-    margin-top: 3px;
-    display: block;
-    font-weight: 500;
-  }
-  .reading-card-orient.upright { color: rgba(168,210,196,0.9); }
-  .reading-card-orient.reversed { color: rgba(200,110,150,0.9); }
-
-  .reading-section-label {
-    font-size: 0.68rem;
-    color: var(--gold-dim);
-    letter-spacing: 0.25em;
-    font-family: 'Cinzel', serif;
-    margin: 12px 0 5px;
-    display: block;
-  }
-
-  .reading-text {
-    font-size: 0.88rem;
-    color: var(--text);
-    line-height: 1.85;
-    opacity: 0.9;
-  }
-
-  .reading-timing {
-    background: rgba(201,168,76,0.06);
-    border-left: 2px solid rgba(201,168,76,0.4);
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px;
-    margin-top: 10px;
-  }
-
-  .reading-timing-label {
-    font-size: 0.65rem;
-    color: var(--gold);
-    letter-spacing: 0.25em;
-    font-family: 'Cinzel', serif;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .reading-timing-text {
-    font-size: 0.83rem;
-    color: var(--silver);
-    line-height: 1.7;
-  }
-
-  /* Copy Button */
   .copy-btn {
     width: 100%;
-    background: transparent;
-    border: 1px solid rgba(201,168,76,0.35);
-    border-radius: 10px;
-    color: var(--gold);
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.38);
+    border-radius: 12px;
+    color: var(--gold-light);
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    padding: 14px;
+    font-size: 0.88rem;
+    letter-spacing: 0.15em;
+    padding: 16px;
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 9px;
+    margin-bottom: 11px;
   }
   .copy-btn:hover {
-    background: rgba(201,168,76,0.08);
+    background: rgba(201,168,76,0.13);
     border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(201,168,76,0.15);
+    box-shadow: 0 0 22px rgba(201,168,76,0.18);
   }
   .copy-btn.copied {
-    border-color: rgba(100,200,160,0.5);
-    color: rgba(130,220,180,0.9);
+    border-color: rgba(90,200,155,0.55);
+    color: rgba(130,220,178,0.95);
+    background: rgba(90,200,155,0.06);
   }
 
-  /* Reset Button */
   .reset-btn {
     width: 100%;
     background: transparent;
-    border: 1px solid rgba(138,98,160,0.4);
-    border-radius: 10px;
-    color: rgba(180,140,220,0.7);
+    border: 1px solid rgba(110,80,150,0.3);
+    border-radius: 12px;
+    color: rgba(160,130,200,0.55);
     font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     padding: 13px;
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 10px;
   }
   .reset-btn:hover {
-    background: rgba(138,98,160,0.08);
-    border-color: rgba(138,98,160,0.6);
-    color: rgba(200,170,240,0.9);
+    background: rgba(110,80,150,0.07);
+    border-color: rgba(140,100,190,0.45);
+    color: rgba(190,160,230,0.8);
   }
 
-  /* Loading */
-  .drawing-animation {
-    text-align: center;
-    padding: 30px;
-    display: none;
-  }
-  .drawing-animation.visible { display: block; }
-  .drawing-orb {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    border: 2px solid var(--gold-dim);
-    border-top-color: var(--gold);
-    animation: spin 1s linear infinite;
-    margin: 0 auto 16px;
-    box-shadow: 0 0 20px var(--glow);
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .drawing-text {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    color: var(--gold-dim);
-    letter-spacing: 0.3em;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
-
-  /* Position labels for spreads */
-  .position-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  .position-tag {
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 0.68rem;
-    color: var(--text-dim);
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.1em;
-  }
-  .position-tag span {
-    color: var(--gold-dim);
-    margin-right: 5px;
-  }
-
-  /* Footer */
   .footer {
     text-align: center;
-    padding: 20px 0 10px;
-    font-size: 0.65rem;
+    padding: 14px 0 4px;
+    font-size: 0.6rem;
     color: var(--text-dim);
-    opacity: 0.4;
+    opacity: 0.3;
     letter-spacing: 0.2em;
-  }
-
-  /* Particle sparkle */
-  @keyframes twinkle {
-    0%,100%{opacity:0;transform:scale(0.5)}
-    50%{opacity:1;transform:scale(1)}
   }
 </style>
 </head>
@@ -666,914 +413,299 @@
 <canvas id="stars-canvas"></canvas>
 
 <div class="content">
-  <!-- Header -->
+
   <div class="header">
     <span class="header-sigil">☽ ✦ ☾</span>
     <h1>命運之鏡</h1>
     <div class="header-sub">TAROT · 78張完整牌組 · 含正逆位</div>
   </div>
 
-  <!-- Question Section -->
   <div class="section-card">
     <div class="section-title">你的問題</div>
-    <span class="question-label">將心中的問題傾注其中，塔羅將為你指引方向</span>
-    <textarea id="question" rows="3" placeholder="例：我目前的感情狀況如何？這份工作適合我嗎？"></textarea>
+    <textarea id="question" rows="3" placeholder="將心中的問題寫下，抽牌後一鍵複製給 AI 解讀…"></textarea>
   </div>
 
-  <!-- Card Count Selector -->
   <div class="section-card">
-    <div class="section-title">牌陣選擇</div>
+    <div class="section-title">抽牌張數</div>
     <div class="count-selector">
-      <button class="count-btn active" data-count="3" onclick="selectCount(3)">
-        <span class="count-num">3</span>
-        <span class="count-desc">過去・現在・未來</span>
+      <button class="count-btn active" data-count="1" onclick="selectCount(1)">
+        <span class="n">1</span><span class="d">單張</span>
+      </button>
+      <button class="count-btn" data-count="3" onclick="selectCount(3)">
+        <span class="n">3</span><span class="d">三張</span>
       </button>
       <button class="count-btn" data-count="5" onclick="selectCount(5)">
-        <span class="count-num">5</span>
-        <span class="count-desc">五角星完整牌陣</span>
+        <span class="n">5</span><span class="d">五張</span>
+      </button>
+      <button class="count-btn" data-count="7" onclick="selectCount(7)">
+        <span class="n">7</span><span class="d">七張</span>
+      </button>
+      <button class="count-btn" data-count="10" onclick="selectCount(10)">
+        <span class="n">10</span><span class="d">十張</span>
       </button>
     </div>
-    <button class="draw-btn" id="drawBtn" onclick="startDrawing()">
-      ✦ 開始占卜 ✦
-    </button>
+    <button class="draw-btn" id="drawBtn" onclick="startDrawing()">✦ 開始占卜 ✦</button>
   </div>
 
-  <!-- Drawing Animation -->
   <div class="drawing-animation" id="drawingAnim">
     <div class="drawing-orb"></div>
     <div class="drawing-text">正在與命運溝通中…</div>
   </div>
 
-  <!-- Spread Area -->
-  <div class="spread-container" id="spreadContainer">
-    <div class="section-card">
-      <div class="spread-title" id="spreadTitle">過去 · 現在 · 未來</div>
-      <div class="position-tags" id="positionTags"></div>
-      <div class="cards-grid" id="cardsGrid"></div>
-    </div>
+  <div class="spread-container section-card" id="spreadContainer">
+    <div class="section-title" id="spreadTitle">抽牌結果</div>
+    <div class="cards-grid" id="cardsGrid"></div>
   </div>
 
-  <!-- Reading Section -->
-  <div class="reading-section" id="readingSection">
-    <div class="section-card" style="padding:0;overflow:hidden;border-color:rgba(201,168,76,0.15)">
-      <div style="padding:16px 18px 12px;border-bottom:1px solid rgba(201,168,76,0.1)">
-        <div class="section-title" style="margin-bottom:0">解讀詳情</div>
-      </div>
-      <div id="readingContent" style="padding:16px 18px"></div>
-    </div>
+  <div class="action-area" id="actionArea">
     <button class="copy-btn" id="copyBtn" onclick="copyResult()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      一鍵複製占卜結果
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      複製問題 ＋ 抽牌結果
     </button>
     <button class="reset-btn" onclick="resetAll()">✦ 重新占卜 ✦</button>
   </div>
 
-  <div class="footer">願星光引領你走向真實的自己 ✦ 塔羅僅供參考，一切的答案在你心中</div>
+  <div class="footer">塔羅僅供參考，一切答案在你心中 ✦</div>
 </div>
 
 <script>
-// ==============================
-// TAROT DATA - 78 CARDS
-// ==============================
 const TAROT = [
-  // === MAJOR ARCANA ===
-  {
-    id:0, name:"愚者", en:"The Fool", num:"0", symbol:"🌟", suit:"大阿爾克那",
-    upright:"象徵新的開始、純真與無限可能。你正站在全新旅程的起點，帶著無畏的勇氣與開放的心靈迎接未知。放下過去的包袱，相信宇宙的指引，一切都將水到渠成。",
-    reversed:"提醒你魯莽衝動或逃避現實的傾向。在行動之前需要更多準備與思考，避免因輕率而錯失良機或造成不必要的損失。",
-    timing_up:"適合嘗試全新事物、開啟冒險旅程、放手一搏的時機。春季、新月前後。",
-    timing_rev:"需暫緩衝動決定，靜待時機成熟再行動。"
-  },
-  {
-    id:1, name:"魔術師", en:"The Magician", num:"I", symbol:"⚡", suit:"大阿爾克那",
-    upright:"代表意志力、技能與行動力。你擁有實現目標所需的一切資源與才能，現在是將想法付諸實踐的黃金時機。相信自己的能力，掌握命運主導權。",
-    reversed:"警示技能尚未成熟或能量被誤用。可能出現欺騙、操縱或虛張聲勢的情況，需審視動機是否純正。",
-    timing_up:"啟動計劃、展現才能、談判簽約、創業開始的最佳時機。",
-    timing_rev:"暫緩重大決策，先補強自身能力與準備。"
-  },
-  {
-    id:2, name:"女祭司", en:"The High Priestess", num:"II", symbol:"🌙", suit:"大阿爾克那",
-    upright:"象徵直覺、神秘智慧與潛意識的力量。答案早已藏在你內心深處，信任你的第六感，靜默觀察而非急於行動。",
-    reversed:"提示你忽視內心聲音或資訊尚未完整。不要輕信表面現象，有隱情尚未浮現，需耐心等待。",
-    timing_up:"需要靜思冥想、直覺判斷、等待更多資訊浮現的時期。滿月時節。",
-    timing_rev:"事情尚未明朗，等待真相自然揭曉。"
-  },
-  {
-    id:3, name:"女皇", en:"The Empress", num:"III", symbol:"🌸", suit:"大阿爾克那",
-    upright:"代表豐盛、創造力、母性滋養與大地之美。感情溫暖豐收，創意蓬勃，適合孕育新生命（無論是實際的生命或創作計劃）。",
-    reversed:"提示創造力受阻、關係中的依賴或過度溺愛。需要找回獨立與自我價值。",
-    timing_up:"愛情開花、懷孕生育、藝術創作、農業收穫的吉時。夏季，春分前後。",
-    timing_rev:"清除阻礙創造力的因素，重建內在豐盛感。"
-  },
-  {
-    id:4, name:"皇帝", en:"The Emperor", num:"IV", symbol:"👑", suit:"大阿爾克那",
-    upright:"象徵權威、秩序、結構與領導力。建立穩固的基礎，以理性與紀律掌控局勢，展現你的決斷力與責任感。",
-    reversed:"提示權威過度、控制慾強或缺乏彈性。父親形象的議題，或組織中的權力鬥爭。",
-    timing_up:"建立制度、擔任領導、申請職位晉升、簽訂合約的時機。",
-    timing_rev:"重新審視領導方式，避免剛愎自用。"
-  },
-  {
-    id:5, name:"教皇", en:"The Hierophant", num:"V", symbol:"⛪", suit:"大阿爾克那",
-    upright:"代表傳統、靈性指引、制度與宗教。尋求有智慧之人的建議，遵循傳統路徑，在體制內尋找成長機會。",
-    reversed:"提示打破傳統規範或質疑既有制度。可能感受到束縛，需要尋找個人信仰與價值觀。",
-    timing_up:"結婚、入學、宗教儀式、加入組織的好時機。",
-    timing_rev:"重新審視傳統束縛，尋找個人真理。"
-  },
-  {
-    id:6, name:"戀人", en:"The Lovers", num:"VI", symbol:"💫", suit:"大阿爾克那",
-    upright:"象徵愛情、選擇、對齊與和諧。重要的感情決策或人生抉擇。遵從內心真實的渴望，價值觀的對齊比外在條件更重要。",
-    reversed:"提示關係中的不和諧、錯誤的選擇或價值觀衝突。需要誠實面對感情問題或重新審視人生方向。",
-    timing_up:"談戀愛、表白告白、重要決定、建立夥伴關係的吉時。",
-    timing_rev:"重新思考感情選擇，釐清自身價值觀。"
-  },
-  {
-    id:7, name:"戰車", en:"The Chariot", num:"VII", symbol:"🏆", suit:"大阿爾克那",
-    upright:"代表意志力、勝利、自我掌控與前進動力。憑著堅強的意志克服障礙，你有能力在競爭中勝出，保持專注與紀律。",
-    reversed:"提示缺乏方向感或自我控制力不足。衝動行事或被情緒主導，需要重新調整步伐。",
-    timing_up:"競爭考試、體育比賽、職場晉升、旅行出征的有利時機。",
-    timing_rev:"暫停強行推進，重新整合內在力量。"
-  },
-  {
-    id:8, name:"力量", en:"Strength", num:"VIII", symbol:"🦁", suit:"大阿爾克那",
-    upright:"象徵溫柔的力量、耐心、勇氣與內在掌控。真正的強大不是蠻力，而是以溫和與愛意駕馭本能與激情。",
-    reversed:"提示自我懷疑、力量被壓抑或能量消耗過度。需要重建自信，學習接受自己的軟弱之處。",
-    timing_up:"面對挑戰、處理衝突、療癒心理創傷的合適時機。",
-    timing_rev:"休養生息，培養內在力量與自信。"
-  },
-  {
-    id:9, name:"隱士", en:"The Hermit", num:"IX", symbol:"🕯️", suit:"大阿爾克那",
-    upright:"代表孤獨的智慧、靈魂探索與內省。暫時退離喧囂，在靜默中尋找真正的答案。獨處是為了更清晰地看見自己。",
-    reversed:"提示孤立無援或逃避現實。過度退縮導致脫離社會，或排斥他人善意的幫助。",
-    timing_up:"冥想靜修、獨自旅行、學術研究、心靈探索的時期。秋冬之際。",
-    timing_rev:"主動走出孤立，重新連結社群與支持系統。"
-  },
-  {
-    id:10, name:"命運之輪", en:"Wheel of Fortune", num:"X", symbol:"☸️", suit:"大阿爾克那",
-    upright:"象徵命運轉折、機運循環與宇宙之流。好運即將降臨，或現狀將有重大改變。把握這個宇宙給予的轉機。",
-    reversed:"提示厄運連連或抗拒改變。循環中的低潮期，需要接受無常，等待輪迴轉回。",
-    timing_up:"把握機運、彩票投注、人生轉折點、命運交叉口的關鍵時機。",
-    timing_rev:"接受當前困境，等待下一個輪迴帶來轉機。"
-  },
-  {
-    id:11, name:"正義", en:"Justice", num:"XI", symbol:"⚖️", suit:"大阿爾克那",
-    upright:"代表公正、真相、因果與均衡。你的行為將得到公正的對待，法律或道德問題將得到解決。誠實面對現實。",
-    reversed:"提示不公正、規避責任或判斷偏頗。需要誠實審視自身行為，承擔應有的責任。",
-    timing_up:"法律訴訟、合約簽訂、公正評判、尋求真相的時機。",
-    timing_rev:"審視自身行為，主動修正不公之處。"
-  },
-  {
-    id:12, name:"倒吊人", en:"The Hanged Man", num:"XII", symbol:"🔮", suit:"大阿爾克那",
-    upright:"象徵暫停、犧牲、新視角與靈魂的轉化。主動選擇放緩節奏，從不同角度看待問題，才能獲得突破性的領悟。",
-    reversed:"提示抗拒犧牲或停滯不前。不願放下舊有模式，導致自我設限，無法前進。",
-    timing_up:"冥想靜心、接受暫停期、換位思考、靈性學習的時機。",
-    timing_rev:"放下執著，接受暫停是為了更好的前行。"
-  },
-  {
-    id:13, name:"死神", en:"Death", num:"XIII", symbol:"🦋", suit:"大阿爾克那",
-    upright:"代表結束與轉化，而非字面死亡。一段關係、工作或生活方式走向終點，為更美好的事物騰出空間。蛻變的過程雖然痛苦，但必要。",
-    reversed:"提示抗拒必要的改變或拒絕放手。害怕終結導致在腐朽的狀況中停滯，阻礙真正的蛻變。",
-    timing_up:"結束舊關係、換工作、搬家、戒除舊習慣、啟動徹底改變的時機。",
-    timing_rev:"放下對舊有事物的執著，允許結束真正發生。"
-  },
-  {
-    id:14, name:"節制", en:"Temperance", num:"XIV", symbol:"🌊", suit:"大阿爾克那",
-    upright:"象徵平衡、耐心、中庸之道與自我療癒。將不同元素和諧融合，找到人生的節奏與平衡點。慢工出細活，急不得。",
-    reversed:"提示過度放縱或失去平衡。極端的行為模式或不健康的習慣正在影響你的生活，需要重建節制。",
-    timing_up:"療癒身心、調解衝突、整合資源、長期計劃的合適時機。",
-    timing_rev:"重新建立健康的生活規律與平衡感。"
-  },
-  {
-    id:15, name:"惡魔", en:"The Devil", num:"XV", symbol:"⛓️", suit:"大阿爾克那",
-    upright:"代表束縛、物質執著與陰影面。某種成癮、執念或有毒的關係正在限制你。鎖鏈其實可以掙脫，你比自己以為的更有力量。",
-    reversed:"提示從束縛中解脫或面對黑暗面。逐漸覺醒並掙脫有毒模式，但可能仍需一段掙扎過程。",
-    timing_up:"戒除上癮、結束有毒關係、面對陰影、深度心理探索的時機。",
-    timing_rev:"意識到束縛的存在，開始採取行動解放自我。"
-  },
-  {
-    id:16, name:"塔", en:"The Tower", num:"XVI", symbol:"⚡", suit:"大阿爾克那",
-    upright:"象徵突然的破壞與啟示。虛假的結構崩塌，雖然過程震撼，卻能清除阻礙真相的障礙。在廢墟中尋找重建的機會。",
-    reversed:"提示避開最糟情況或混亂已在醞釀。危機可能以較緩慢的方式出現，給你時間做出調整。",
-    timing_up:"危機爆發、突發事件、徹底重建、揭露真相的關鍵時刻。",
-    timing_rev:"預防性地解決積累的問題，避免更大的崩塌。"
-  },
-  {
-    id:17, name:"星星", en:"The Star", num:"XVII", symbol:"⭐", suit:"大阿爾克那",
-    upright:"代表希望、療癒、靈感與更新。在風暴過後，星光指引你前行。保持信念，宇宙正在以你看不見的方式支持你。",
-    reversed:"提示絕望感或自我信心喪失。難以看見未來的可能性，需要重新連結內在的希望之光。",
-    timing_up:"從創傷中復原、尋找靈感、設立長期目標、祈禱許願的時機。",
-    timing_rev:"重新尋找生命的意義與希望之源。"
-  },
-  {
-    id:18, name:"月亮", en:"The Moon", num:"XVIII", symbol:"🌕", suit:"大阿爾克那",
-    upright:"象徵幻象、潛意識與夢境的領域。事情並非表面所見，恐懼與不確定性籠罩，需要信任直覺穿越迷霧，尋找隱藏的真相。",
-    reversed:"提示迷惑逐漸消散或被壓抑的恐懼浮現。混亂中透出曙光，但可能先需面對不想看見的真相。",
-    timing_up:"夢境解析、處理恐懼、潛意識探索、滿月儀式的時機。",
-    timing_rev:"迷霧逐漸散去，真相即將揭曉。"
-  },
-  {
-    id:19, name:"太陽", en:"The Sun", num:"XIX", symbol:"☀️", suit:"大阿爾克那",
-    upright:"代表喜悅、成功、活力與清明。光芒照耀一切，真相大白，成功觸手可及。以孩子般的純真與熱情享受生命的美好。",
-    reversed:"提示暫時的烏雲遮蔽或過度自負。喜悅被遮蔽，但太陽從未真正消失，調整視角即可重見光明。",
-    timing_up:"婚禮、慶典、成功慶祝、夏季旅遊、公開表達自我的最佳時機。",
-    timing_rev:"尋找生活中的光明面，重新點燃對生命的熱情。"
-  },
-  {
-    id:20, name:"審判", en:"Judgement", num:"XX", symbol:"📯", suit:"大阿爾克那",
-    upright:"象徵覺醒、重生與最終的清算。靈魂的呼喚讓你看清真正的使命，過去的決定得到審視，新的人生篇章即將展開。",
-    reversed:"提示逃避自我審視或拒絕轉化。對靈魂的呼喚充耳不聞，困在過去的罪惡感或後悔中。",
-    timing_up:"人生回顧、重大決定、靈性覺醒、從過去解脫的時機。",
-    timing_rev:"放下自我批判，允許自己迎接重生。"
-  },
-  {
-    id:21, name:"世界", en:"The World", num:"XXI", symbol:"🌍", suit:"大阿爾克那",
-    upright:"代表圓滿、整合、成就與循環的完成。你達到了一個重要的人生里程碑，一切都完美地整合在一起。準備好進入下一個更大的循環。",
-    reversed:"提示未竟之業或延遲的成功。循環尚未完整結束，需要補足缺漏，才能真正迎來圓滿。",
-    timing_up:"重大目標達成、畢業、結婚、事業巔峰、人生重要里程碑的時機。",
-    timing_rev:"完成尚未結束的課題，再迎接下一個圓滿。"
-  },
-  // === WANDS ===
-  {
-    id:22, name:"權杖首牌", en:"Ace of Wands", num:"A", symbol:"🔥", suit:"權杖",
-    upright:"新的激情與創意火花點燃，充滿活力的開始。把握這股創造能量，大膽行動。",
-    reversed:"創意受阻或計劃延誤，熱情難以持續，需要重新點燃內在動力。",
-    timing_up:"啟動創意計劃、開始新事業、充滿熱情行動的時機。",
-    timing_rev:"等待熱情重燃，審視計劃是否真正符合自身價值。"
-  },
-  {
-    id:23, name:"權杖二", en:"Two of Wands", num:"II", symbol:"🗺️", suit:"權杖",
-    upright:"規劃未來、探索可能性，站在高點審視全局。準備踏出舒適圈，擴展視野。",
-    reversed:"缺乏計劃或對未來感到恐懼，猶豫不決阻礙前進。",
-    timing_up:"制定長期計劃、考慮出國或擴展業務的時機。",
-    timing_rev:"克服對未知的恐懼，重新評估長期方向。"
-  },
-  {
-    id:24, name:"權杖三", en:"Three of Wands", num:"III", symbol:"⛵", suit:"權杖",
-    upright:"計劃開始實現，等待遠方的船回航。擴張版圖的時機，合作機會在遠方。",
-    reversed:"計劃受阻或合作延誤，需耐心等待，或重新審視計劃是否可行。",
-    timing_up:"商業擴展、等待遠距合作成果、海外機會的時機。",
-    timing_rev:"調整計劃，不要急於求成。"
-  },
-  {
-    id:25, name:"權杖四", en:"Four of Wands", num:"IV", symbol:"🎉", suit:"權杖",
-    upright:"慶典、婚禮、里程碑的慶祝。家庭與社群的和諧，一段歡慶的時期。",
-    reversed:"慶典延後或家庭關係緊張。喜悅被壓抑，需要修復家庭和諧。",
-    timing_up:"婚禮、喬遷之喜、慶功宴、家族聚會的吉時。",
-    timing_rev:"修復家庭裂痕，待時機成熟再慶祝。"
-  },
-  {
-    id:26, name:"權杖五", en:"Five of Wands", num:"V", symbol:"⚔️", suit:"權杖",
-    upright:"競爭、衝突與意見分歧。雖然混亂，卻也是成長的契機。在競爭中磨練自身。",
-    reversed:"避免衝突或妥協求和。競爭趨於平息，或選擇退出無謂的爭鬥。",
-    timing_up:"競爭激烈的職場或學業環境，需展現自我的時期。",
-    timing_rev:"尋求和解，避免無謂消耗。"
-  },
-  {
-    id:27, name:"權杖六", en:"Six of Wands", num:"VI", symbol:"🏅", suit:"權杖",
-    upright:"勝利、公眾認可與成功。努力得到回報，贏得眾人的掌聲與肯定。",
-    reversed:"成功延遲或遭遇批評。驕傲自大可能帶來反效果，需保持謙遜。",
-    timing_up:"公開發表成果、比賽奪冠、職場晉升慶祝的時機。",
-    timing_rev:"保持謙遜，不要過早宣揚成功。"
-  },
-  {
-    id:28, name:"權杖七", en:"Seven of Wands", num:"VII", symbol:"🛡️", suit:"權杖",
-    upright:"捍衛立場、抵禦挑戰。你處於有利位置，雖面臨壓力，但有能力守住成果。",
-    reversed:"被壓倒或過度防禦。選擇退讓可能是智慧，而非懦弱。",
-    timing_up:"需要堅守立場、抵禦批評或競爭壓力的時期。",
-    timing_rev:"評估是否值得繼續抗爭，或優雅地讓步。"
-  },
-  {
-    id:29, name:"權杖八", en:"Eight of Wands", num:"VIII", symbol:"💨", suit:"權杖",
-    upright:"快速行動、訊息傳遞與進展神速。事情迅速發展，把握這股動能，旅行或遠距溝通順利。",
-    reversed:"延誤、訊息混亂或能量分散。計劃被打亂，需要重新整合步調。",
-    timing_up:"快速決策、旅行出發、密集溝通、事情快速推進的時期。",
-    timing_rev:"耐心等待，不要操之過急。"
-  },
-  {
-    id:30, name:"權杖九", en:"Nine of Wands", num:"IX", symbol:"🏔️", suit:"權杖",
-    upright:"疲憊但堅守，勝利近在咫尺。雖然傷痕累累，仍保持警覺與意志力。最後的考驗。",
-    reversed:"放棄或過度防衛。長期的警戒消耗了太多能量，需要暫時休息補充力量。",
-    timing_up:"堅持到底的最後衝刺、面對最終挑戰的時期。",
-    timing_rev:"允許自己休息，尋求他人的支持。"
-  },
-  {
-    id:31, name:"權杖十", en:"Ten of Wands", num:"X", symbol:"📦", suit:"權杖",
-    upright:"承擔過重的責任與負擔。雖然接近目標，但已超過承受極限，需要學會委派或減輕負荷。",
-    reversed:"終於放下重擔或拒絕不必要的責任。從過度承擔中解脫，重新找回輕盈。",
-    timing_up:"需要認真評估工作量、學習說不、委派任務的時機。",
-    timing_rev:"卸下不屬於自己的責任，重新找回生命的輕盈。"
-  },
-  {
-    id:32, name:"權杖侍者", en:"Page of Wands", num:"侍", symbol:"🌱", suit:"權杖",
-    upright:"充滿熱情的新消息、好奇探索的精神。新的靈感或機會帶來興奮感，保持開放的探索心態。",
-    reversed:"能量散漫、計劃無法落實或壞消息。熱情來得快去得也快，缺乏持續力。",
-    timing_up:"接收新靈感、開始新嗜好、年輕能量注入的時機。",
-    timing_rev:"學習紮根落實，不要只停留在空想階段。"
-  },
-  {
-    id:33, name:"權杖騎士", en:"Knight of Wands", num:"騎", symbol:"🐎", suit:"權杖",
-    upright:"充滿活力的行動派，大膽追夢。衝勁十足，不畏風險，以熱情引領前進。",
-    reversed:"魯莽衝動、精力過度分散。需要稍作停頓，考慮行動帶來的後果。",
-    timing_up:"快速行動、追求冒險、衝刺目標的時機。",
-    timing_rev:"冷靜下來，確保衝動不會帶來不必要的混亂。"
-  },
-  {
-    id:34, name:"權杖皇后", en:"Queen of Wands", num:"后", symbol:"🌻", suit:"權杖",
-    upright:"充滿魅力與自信的領導者，熱情而獨立。以正向能量感染周圍的人，大膽展現自我。",
-    reversed:"過度自信或嫉妒心起。能量被誤用，或感到內在火焰黯淡。",
-    timing_up:"展現領導魅力、啟發他人、創意展現的時機。",
-    timing_rev:"重新連結內在熱情，避免讓嫉妒消耗正能量。"
-  },
-  {
-    id:35, name:"權杖國王", en:"King of Wands", num:"王", symbol:"👑", suit:"權杖",
-    upright:"有遠見的領導者，以熱情與智慧引領他人。成熟的創業精神，以自信掌舵人生。",
-    reversed:"傲慢獨裁或優柔寡斷。領導力受阻，需要以包容代替控制。",
-    timing_up:"創業領導、做出重大決策、激勵他人的時機。",
-    timing_rev:"培養更具包容性的領導風格，傾聽他人意見。"
-  },
-  // === CUPS ===
-  {
-    id:36, name:"聖杯首牌", en:"Ace of Cups", num:"A", symbol:"💧", suit:"聖杯",
-    upright:"情感新開始、愛的流動、靈感湧現。心扉開放，允許愛與喜悅充滿你的生命。",
-    reversed:"情感壓抑或失去連結。愛的能量受阻，需要療癒心靈的傷口。",
-    timing_up:"新戀情開始、深化感情連結、創意靈感爆發的時機。",
-    timing_rev:"療癒情感創傷，重新向愛開放。"
-  },
-  {
-    id:37, name:"聖杯二", en:"Two of Cups", num:"II", symbol:"💑", suit:"聖杯",
-    upright:"相互吸引、建立深厚連結與伙伴關係。兩顆心靈的相遇與和諧，愛情或友情的美麗交融。",
-    reversed:"關係失衡或溝通障礙。連結中斷，需要誠實溝通重建和諧。",
-    timing_up:"告白、訂婚、建立深厚友誼或商業夥伴關係的時機。",
-    timing_rev:"修復關係裂痕，重建相互尊重。"
-  },
-  {
-    id:38, name:"聖杯三", en:"Three of Cups", num:"III", symbol:"🥂", suit:"聖杯",
-    upright:"歡慶、友情、社群聚會的喜悅。與好友共享美好時光，感恩生命中的豐盛。",
-    reversed:"派系紛爭或過度放縱。社交場合中的表面歡笑掩蓋深層問題。",
-    timing_up:"朋友聚會、婚禮派對、慶典活動、女生們的閨蜜時光。",
-    timing_rev:"審視社交圈的真實性，避免過度社交消耗能量。"
-  },
-  {
-    id:39, name:"聖杯四", en:"Four of Cups", num:"IV", symbol:"🤔", suit:"聖杯",
-    upright:"冷漠、無聊或不滿現狀。當你專注於自己的抱怨時，宇宙提供的禮物可能就此錯過。",
-    reversed:"從冷漠中覺醒，重新對生命的機會敞開心胸。",
-    timing_up:"需要從日常中尋找新視角，或接受眼前機會的時機。",
-    timing_rev:"從自憐中走出，主動迎接新的可能。"
-  },
-  {
-    id:40, name:"聖杯五", en:"Five of Cups", num:"V", symbol:"😢", suit:"聖杯",
-    upright:"悲傷與失落，沉浸於失去的痛苦中。但要記得，仍有兩杯未傾倒，失去並非全部。",
-    reversed:"從悲傷中慢慢復原，學習接受失去並重新前行。",
-    timing_up:"哀悼失去、處理分手或失意的療癒期。",
-    timing_rev:"悲傷逐漸平復，重新聚焦於仍擁有的美好。"
-  },
-  {
-    id:41, name:"聖杯六", en:"Six of Cups", num:"VI", symbol:"🌸", suit:"聖杯",
-    upright:"童年回憶、純真的愛、懷舊與過去的連結。重返美好的舊時光，或與舊識重逢。",
-    reversed:"停留在過去無法前行，或對童年創傷的迴避。",
-    timing_up:"老友重逢、回老家、回顧過去、與孩子互動的時機。",
-    timing_rev:"放下對過去的執著，擁抱當下的美好。"
-  },
-  {
-    id:42, name:"聖杯七", en:"Seven of Cups", num:"VII", symbol:"🌈", suit:"聖杯",
-    upright:"幻想、選擇過多與白日夢。在眾多可能性中難以聚焦，需要分辨什麼是真實可行的。",
-    reversed:"從幻想回歸現實，做出明確的選擇。",
-    timing_up:"創意發想、夢想規劃時期，但需在想像後付諸行動。",
-    timing_rev:"放下不切實際的幻想，務實地選擇一條道路。"
-  },
-  {
-    id:43, name:"聖杯八", en:"Eight of Cups", num:"VIII", symbol:"🚶", suit:"聖杯",
-    upright:"放棄讓你不再快樂的事物，追尋更深的意義。雖然離開需要勇氣，但繼續留在空洞的情境中更是損失。",
-    reversed:"猶豫是否要離開，或害怕面對未知而選擇留在不健康的環境。",
-    timing_up:"決定離開有毒關係或工作、尋找人生更深意義的轉折點。",
-    timing_rev:"認真面對是否繼續或離開的問題，不要一再推遲決定。"
-  },
-  {
-    id:44, name:"聖杯九", en:"Nine of Cups", num:"IX", symbol:"✨", suit:"聖杯",
-    upright:"願望成真、情感滿足與物質享受。這是塔羅中的「願望牌」，你所渴望的即將實現。",
-    reversed:"不滿足或願望實現後的空虛感。物質擁有並不帶來真正的快樂，需尋找內在滿足。",
-    timing_up:"許下心願、享受生活豐盛、慶祝願望成真的時機。",
-    timing_rev:"重新定義真正的快樂與滿足感。"
-  },
-  {
-    id:45, name:"聖杯十", en:"Ten of Cups", num:"X", symbol:"🌈", suit:"聖杯",
-    upright:"家庭幸福、情感圓滿與長久喜悅。彩虹出現在風雨之後，感情世界達到完美的和諧狀態。",
-    reversed:"家庭不和諧或幸福外表下的矛盾。外表美滿的背後有需要處理的問題。",
-    timing_up:"家庭和樂、婚姻幸福、社群和諧的美好時光。",
-    timing_rev:"誠實面對家庭問題，共同修復關係。"
-  },
-  {
-    id:46, name:"聖杯侍者", en:"Page of Cups", num:"侍", symbol:"🐟", suit:"聖杯",
-    upright:"情感直覺、創意靈感與驚喜訊息。以開放的心接受意外的情感啟示。",
-    reversed:"情感不成熟或訊息不實。不要輕信每一個感性的衝動。",
-    timing_up:"接收情感啟示、收到好消息、開始學習藝術或靈性的時機。",
-    timing_rev:"辨別直覺與幻想的差別，保持情感上的成熟。"
-  },
-  {
-    id:47, name:"聖杯騎士", en:"Knight of Cups", num:"騎", symbol:"🦢", suit:"聖杯",
-    upright:"浪漫的追求者、靈感的傳遞者。以情感與直覺引領行動，浪漫的邀約或藝術機會即將到來。",
-    reversed:"情緒化或過於理想化。可能出現誘惑或不切實際的浪漫幻想。",
-    timing_up:"浪漫邀約、藝術展覽、情感表達的最佳時機。",
-    timing_rev:"分辨浪漫幻想與真實感情，不要衝動行事。"
-  },
-  {
-    id:48, name:"聖杯皇后", en:"Queen of Cups", num:"后", symbol:"🧜", suit:"聖杯",
-    upright:"情感豐富的療癒者，以直覺與同理心滋養他人。深邃的內在世界，敏感而充滿愛。",
-    reversed:"情緒不穩或過度感性，以情緒操控他人。需要照顧自己的情感需求。",
-    timing_up:"療癒他人、藝術創作、深化情感連結的時機。",
-    timing_rev:"先照顧好自己的情感，再去照顧他人。"
-  },
-  {
-    id:49, name:"聖杯國王", en:"King of Cups", num:"王", symbol:"🌊", suit:"聖杯",
-    upright:"情感成熟的智者，以慈悲與理解掌舵。在情感與理智間找到完美平衡，是值得信賴的支柱。",
-    reversed:"情感操控或壓抑情感。外表冷靜的背後可能隱藏著情感的波濤。",
-    timing_up:"成熟處理情感問題、擔任調解者、做出情感決策的時機。",
-    timing_rev:"誠實面對自身的情感需求，不要壓抑真實感受。"
-  },
-  // === SWORDS ===
-  {
-    id:50, name:"寶劍首牌", en:"Ace of Swords", num:"A", symbol:"⚔️", suit:"寶劍",
-    upright:"真相的力量、思想的突破與清明的決斷。新的想法或通訊切斷迷霧，以理性的力量開創新局。",
-    reversed:"混亂的想法或錯誤的決策。思路不清，需要先整理思緒再行動。",
-    timing_up:"重要決定、真相大白、辯論發表的時機。",
-    timing_rev:"理清思緒後再做決定，避免在混亂中行動。"
-  },
-  {
-    id:51, name:"寶劍二", en:"Two of Swords", num:"II", symbol:"🙈", suit:"寶劍",
-    upright:"難以抉擇、迴避衝突。雙眼蒙蔽無法看清全貌，需要移除蒙蔽你的事物才能做出正確選擇。",
-    reversed:"終於做出決定或不再迴避衝突。雖然選擇帶來痛苦，但繼續停滯更是折磨。",
-    timing_up:"面對艱難決定、衝突調解的時機，需要平靜坐下來思考。",
-    timing_rev:"終於面對迴避已久的問題，做出決定。"
-  },
-  {
-    id:52, name:"寶劍三", en:"Three of Swords", num:"III", symbol:"💔", suit:"寶劍",
-    upright:"心碎、分離與悲傷的痛苦。承認痛苦是療癒的開始，讓眼淚沖刷傷口。",
-    reversed:"從痛苦中逐漸復原，但可能仍執著於舊傷。",
-    timing_up:"處理悲傷、分手療癒、面對失落的時期。",
-    timing_rev:"悲傷開始消退，但需要避免反覆糾結過去。"
-  },
-  {
-    id:53, name:"寶劍四", en:"Four of Swords", num:"IV", symbol:"😴", suit:"寶劍",
-    upright:"休息與恢復。在戰爭之後需要暫時退後，養精蓄銳才能再次出發。",
-    reversed:"強迫自己休息但心難以靜下，或過度休息導致怠惰。",
-    timing_up:"養病休假、冥想靜修、充電休息的時期。",
-    timing_rev:"找到適當的休息方式，不要讓焦慮干擾恢復。"
-  },
-  {
-    id:54, name:"寶劍五", en:"Five of Swords", num:"V", symbol:"🏴", suit:"寶劍",
-    upright:"衝突後的苦澀勝利或體面的失敗。即使贏了，也要思考代價是否值得。",
-    reversed:"從衝突中走出，尋求和解。學習放下爭鬥，尋找雙贏方案。",
-    timing_up:"解決衝突後的復原，或做出明智的退讓。",
-    timing_rev:"選擇和平而非勝負，修復因衝突而受損的關係。"
-  },
-  {
-    id:55, name:"寶劍六", en:"Six of Swords", num:"VI", symbol:"⛵", suit:"寶劍",
-    upright:"過渡期與離開困境。雖然旅途不輕鬆，但正在從風暴中移向更平靜的水域。",
-    reversed:"無法離開困境或旅途受阻。需要更大的勇氣才能真正移開。",
-    timing_up:"搬家、旅行、結束困難時期、邁向新開始的轉換期。",
-    timing_rev:"評估是什麼阻礙你前往更好的地方。"
-  },
-  {
-    id:56, name:"寶劍七", en:"Seven of Swords", num:"VII", symbol:"🦊", suit:"寶劍",
-    upright:"策略性行動、秘密計劃或欺騙。可能有人在背後耍手段，或你需要更聰明的策略。",
-    reversed:"揭露欺騙或良心發現的懺悔。秘密即將浮出水面。",
-    timing_up:"需要謹慎防範欺騙、制定巧妙策略的時機。",
-    timing_rev:"揭露謊言，或主動承認自己的錯誤。"
-  },
-  {
-    id:57, name:"寶劍八", en:"Eight of Swords", num:"VIII", symbol:"🔒", suit:"寶劍",
-    upright:"自我設限與心理束縛。你以為的牢籠其實沒有想像中牢固，問題在於你的思維方式。",
-    reversed:"從心理牢籠中解放，打破限制性信念。",
-    timing_up:"突破心理障礙、打破固有思維、尋求心理諮詢的時機。",
-    timing_rev:"逐漸看清自設的限制，開始採取行動改變。"
-  },
-  {
-    id:58, name:"寶劍九", en:"Nine of Swords", num:"IX", symbol:"😰", suit:"寶劍",
-    upright:"焦慮、夜半憂慮與噩夢纏身。恐懼和擔憂可能超過現實需要，尋求支持來面對這些恐懼。",
-    reversed:"焦慮逐漸減輕，或終於正視和處理深層的擔憂。",
-    timing_up:"需要處理焦慮、尋求心理支持、面對恐懼的時期。",
-    timing_rev:"焦慮的高峰已過，慢慢走向內心的平靜。"
-  },
-  {
-    id:59, name:"寶劍十", en:"Ten of Swords", num:"X", symbol:"🌄", suit:"寶劍",
-    upright:"痛苦的結束與徹底的失敗。雖然傷痛，但黎明就在眼前，最黑暗的時刻已然過去。",
-    reversed:"緩慢復原或拒絕讓結束真正結束。",
-    timing_up:"告別一段痛苦，等待黎明到來，正式放下的時刻。",
-    timing_rev:"不要對過去的失敗念念不忘，允許它真正結束。"
-  },
-  {
-    id:60, name:"寶劍侍者", en:"Page of Swords", num:"侍", symbol:"🦅", suit:"寶劍",
-    upright:"好奇的探索者、敏銳的觀察者。以新鮮的眼光看待問題，帶來新的資訊或對話。",
-    reversed:"八卦謠言或輕浮的言行。需要在開口前三思而後行。",
-    timing_up:"學習新知、展開調查、與年輕人交流的時機。",
-    timing_rev:"謹慎發言，避免散播未經證實的信息。"
-  },
-  {
-    id:61, name:"寶劍騎士", en:"Knight of Swords", num:"騎", symbol:"⚡", suit:"寶劍",
-    upright:"行動迅速、直接果斷的鬥士。以強大的意志力和清晰的思維快速推進目標。",
-    reversed:"魯莽衝動或過於好鬥。言語像刀，需要學習在行動前思考後果。",
-    timing_up:"需要快速決策、強力推進計劃、辯護立場的時機。",
-    timing_rev:"放緩節奏，考慮行動帶來的長遠影響。"
-  },
-  {
-    id:62, name:"寶劍皇后", en:"Queen of Swords", num:"后", symbol:"🗡️", suit:"寶劍",
-    upright:"清明的智慧、直接的溝通與獨立的精神。以理性和公正做出判斷，不被情緒左右。",
-    reversed:"過於冷酷或以批評傷人。鋒利的言語可能掩蓋了深藏的傷痛。",
-    timing_up:"需要客觀判斷、直接溝通、做出困難決定的時機。",
-    timing_rev:"在犀利的外表下尋找溫柔，以同理心軟化過於嚴苛的態度。"
-  },
-  {
-    id:63, name:"寶劍國王", en:"King of Swords", num:"王", symbol:"⚖️", suit:"寶劍",
-    upright:"智識的權威、公正的裁判、清晰的溝通者。以道德和理性的力量做出決策，是值得信賴的領導者。",
-    reversed:"濫用權威或用智識操控他人。需要反思領導方式是否公正。",
-    timing_up:"法律事務、重要決策、公正仲裁、展現智識領導力的時機。",
-    timing_rev:"審視是否正在用智識力量壓制他人，回歸公正。"
-  },
-  // === PENTACLES ===
-  {
-    id:64, name:"錢幣首牌", en:"Ace of Pentacles", num:"A", symbol:"💰", suit:"錢幣",
-    upright:"物質新機會、財務新開始、具體計劃的種子。豐盛的機會近在眼前，抓住這個踏實的起點。",
-    reversed:"財務機會流失或實際計劃難以落實。需要更紮實的基礎才能展開物質上的新局。",
-    timing_up:"簽訂合約、開始新工作、投資、開始儲蓄的吉時。",
-    timing_rev:"先鞏固財務基礎，等待真正踏實的機會。"
-  },
-  {
-    id:65, name:"錢幣二", en:"Two of Pentacles", num:"II", symbol:"🤹", suit:"錢幣",
-    upright:"靈活應變、多工管理與資源平衡。雖然正在同時處理多件事，保持靈活和幽默是關鍵。",
-    reversed:"失去平衡或財務管理不當。事情多到無法妥善應對，需要設定優先順序。",
-    timing_up:"需要靈活調度資源、管理多個項目、財務規劃的時期。",
-    timing_rev:"減少同時進行的事項，專注最重要的事。"
-  },
-  {
-    id:66, name:"錢幣三", en:"Three of Pentacles", num:"III", symbol:"🏗️", suit:"錢幣",
-    upright:"團隊合作、學習技能與認真工作。在合作中精進技術，付出的努力得到認可。",
-    reversed:"缺乏合作精神或工作品質低落。需要重視他人的貢獻，改善溝通與合作方式。",
-    timing_up:"團隊項目、學徒期、展現專業技能的時機。",
-    timing_rev:"改善與同事的關係，提升工作的投入程度。"
-  },
-  {
-    id:67, name:"錢幣四", en:"Four of Pentacles", num:"IV", symbol:"🤑", suit:"錢幣",
-    upright:"穩固財務、謹慎保守與控制慾。財務管理謹慎是優點，但過度緊抓不放也可能阻礙成長。",
-    reversed:"過度揮霍或放開控制。財務管理失衡，需要重新找到收支平衡點。",
-    timing_up:"儲蓄、保護資產、謹慎理財的時期。",
-    timing_rev:"學習放開一些，在安全感與享受生活之間取得平衡。"
-  },
-  {
-    id:68, name:"錢幣五", en:"Five of Pentacles", num:"V", symbol:"❄️", suit:"錢幣",
-    upright:"財務困境、物質匱乏或感到被排除在外。在寒冷中行走，但溫暖的庇護所可能就在不遠處。",
-    reversed:"財務情況開始好轉，從困境中逐漸恢復。",
-    timing_up:"尋求財務援助、面對物質挑戰、尋找支持資源的時期。",
-    timing_rev:"走出財務困境，重新建立穩定的生活基礎。"
-  },
-  {
-    id:69, name:"錢幣六", en:"Six of Pentacles", num:"VI", symbol:"🎁", suit:"錢幣",
-    upright:"給予與接受的平衡、慈善與分享。慷慨分享你的資源，或接受他人的善意幫助。",
-    reversed:"不平等的給予或附帶條件的慷慨。反思你的給予動機是否純粹。",
-    timing_up:"捐款、施與受的平衡、尋求或提供援助的時機。",
-    timing_rev:"檢視給予或接受中的不平衡，確保互動是真心真意的。"
-  },
-  {
-    id:70, name:"錢幣七", en:"Seven of Pentacles", num:"VII", symbol:"🌱", suit:"錢幣",
-    upright:"評估成果、耐心等候收穫。辛勤付出後的暫時停頓，評估是否在正確的方向上耕耘。",
-    reversed:"投資回報不如預期或缺乏耐心。需要重新評估努力的方向與效益。",
-    timing_up:"評估長期計劃的進展、投資回報的觀察期。",
-    timing_rev:"重新思考耕耘的方向，確保努力用在刀口上。"
-  },
-  {
-    id:71, name:"錢幣八", en:"Eight of Pentacles", num:"VIII", symbol:"⚒️", suit:"錢幣",
-    upright:"勤奮工作、精進技藝與專注投入。以工匠精神打磨你的技能，努力必有回報。",
-    reversed:"完美主義導致停滯，或重複無意義的工作。需要找到工作的熱情與目的。",
-    timing_up:"學習新技能、進修深造、投入細緻工作的時期。",
-    timing_rev:"找到工作的意義，避免因過度追求完美而裹足不前。"
-  },
-  {
-    id:72, name:"錢幣九", en:"Nine of Pentacles", num:"IX", symbol:"🌿", suit:"錢幣",
-    upright:"獨立、豐盛與自給自足。享受辛勤工作帶來的果實，優雅地享受獨處時光。",
-    reversed:"過度依賴或表面的繁榮。真正的自給自足需要建立在踏實的基礎上。",
-    timing_up:"享受個人成就、獨自旅行、精緻生活品味的時機。",
-    timing_rev:"重建真正的財務獨立，不要以奢華掩蓋不安全感。"
-  },
-  {
-    id:73, name:"錢幣十", en:"Ten of Pentacles", num:"X", symbol:"🏡", suit:"錢幣",
-    upright:"家族財富、長久穩固與世代傳承。物質上的圓滿，家庭與財富的和諧，長期穩固的基礎。",
-    reversed:"家族財富的爭奪或傳承問題。家庭中的物質糾紛需要透過溝通解決。",
-    timing_up:"購置房產、家族聚會、長期投資、財富傳承規劃的時機。",
-    timing_rev:"處理家族財務糾紛，重建家庭和諧。"
-  },
-  {
-    id:74, name:"錢幣侍者", en:"Page of Pentacles", num:"侍", symbol:"🌿", suit:"錢幣",
-    upright:"對物質世界充滿好奇的學習者。新的實際計劃或學習機會，以務實的態度迎接新的可能。",
-    reversed:"缺乏執行力或沉溺於夢想卻不付諸行動。",
-    timing_up:"開始學習新技能、申請獎學金、開展實習的時機。",
-    timing_rev:"從夢想走向行動，為計劃建立具體的第一步。"
-  },
-  {
-    id:75, name:"錢幣騎士", en:"Knight of Pentacles", num:"騎", symbol:"🐂", suit:"錢幣",
-    upright:"勤奮可靠的行動者，以毅力和實際步驟穩步推進目標。雖然進展緩慢，但紮實可信。",
-    reversed:"固執守舊或進展停滯。需要引入新的方法或突破固有的框架。",
-    timing_up:"長期穩定的工作推進、財務計劃執行、可靠合作夥伴。",
-    timing_rev:"引入新的方法，避免因固執而錯失更好的機會。"
-  },
-  {
-    id:76, name:"錢幣皇后", en:"Queen of Pentacles", num:"后", symbol:"🦌", suit:"錢幣",
-    upright:"務實的滋養者，以物質豐盛照顧他人。能幹而慷慨的家庭管理者，以踏實的愛滋養周圍的人。",
-    reversed:"過度沉迷物質或忽視精神層面。在照顧他人時忘記照顧自己。",
-    timing_up:"家庭管理、財務規劃、創業經營、照顧他人的時機。",
-    timing_rev:"在物質照顧外，同樣重視精神與情感的滋養。"
-  },
-  {
-    id:77, name:"錢幣國王", en:"King of Pentacles", num:"王", symbol:"🦬", suit:"錢幣",
-    upright:"物質成功的典範，以可靠的判斷力和豐富的經驗創造穩固的財富。值得信賴的財務顧問和守護者。",
-    reversed:"物質主義過度或財務管理失當。用金錢控制他人，或對財富的追求超過了其他一切。",
-    timing_up:"財務投資決策、商業合作、建立長期財務安全的時機。",
-    timing_rev:"重新平衡物質與精神的追求，避免被財富奴役。"
-  }
+  {name:"愚者",     en:"The Fool",            num:"0",    suit:"大阿爾克那"},
+  {name:"魔術師",   en:"The Magician",        num:"I",    suit:"大阿爾克那"},
+  {name:"女祭司",   en:"The High Priestess",  num:"II",   suit:"大阿爾克那"},
+  {name:"女皇",     en:"The Empress",         num:"III",  suit:"大阿爾克那"},
+  {name:"皇帝",     en:"The Emperor",         num:"IV",   suit:"大阿爾克那"},
+  {name:"教皇",     en:"The Hierophant",      num:"V",    suit:"大阿爾克那"},
+  {name:"戀人",     en:"The Lovers",          num:"VI",   suit:"大阿爾克那"},
+  {name:"戰車",     en:"The Chariot",         num:"VII",  suit:"大阿爾克那"},
+  {name:"力量",     en:"Strength",            num:"VIII", suit:"大阿爾克那"},
+  {name:"隱士",     en:"The Hermit",          num:"IX",   suit:"大阿爾克那"},
+  {name:"命運之輪", en:"Wheel of Fortune",    num:"X",    suit:"大阿爾克那"},
+  {name:"正義",     en:"Justice",             num:"XI",   suit:"大阿爾克那"},
+  {name:"倒吊人",   en:"The Hanged Man",      num:"XII",  suit:"大阿爾克那"},
+  {name:"死神",     en:"Death",               num:"XIII", suit:"大阿爾克那"},
+  {name:"節制",     en:"Temperance",          num:"XIV",  suit:"大阿爾克那"},
+  {name:"惡魔",     en:"The Devil",           num:"XV",   suit:"大阿爾克那"},
+  {name:"塔",       en:"The Tower",           num:"XVI",  suit:"大阿爾克那"},
+  {name:"星星",     en:"The Star",            num:"XVII", suit:"大阿爾克那"},
+  {name:"月亮",     en:"The Moon",            num:"XVIII",suit:"大阿爾克那"},
+  {name:"太陽",     en:"The Sun",             num:"XIX",  suit:"大阿爾克那"},
+  {name:"審判",     en:"Judgement",           num:"XX",   suit:"大阿爾克那"},
+  {name:"世界",     en:"The World",           num:"XXI",  suit:"大阿爾克那"},
+  {name:"權杖首牌", en:"Ace of Wands",        num:"A",    suit:"權杖"},
+  {name:"權杖二",   en:"Two of Wands",        num:"2",    suit:"權杖"},
+  {name:"權杖三",   en:"Three of Wands",      num:"3",    suit:"權杖"},
+  {name:"權杖四",   en:"Four of Wands",       num:"4",    suit:"權杖"},
+  {name:"權杖五",   en:"Five of Wands",       num:"5",    suit:"權杖"},
+  {name:"權杖六",   en:"Six of Wands",        num:"6",    suit:"權杖"},
+  {name:"權杖七",   en:"Seven of Wands",      num:"7",    suit:"權杖"},
+  {name:"權杖八",   en:"Eight of Wands",      num:"8",    suit:"權杖"},
+  {name:"權杖九",   en:"Nine of Wands",       num:"9",    suit:"權杖"},
+  {name:"權杖十",   en:"Ten of Wands",        num:"10",   suit:"權杖"},
+  {name:"權杖侍者", en:"Page of Wands",       num:"侍",   suit:"權杖"},
+  {name:"權杖騎士", en:"Knight of Wands",     num:"騎",   suit:"權杖"},
+  {name:"權杖皇后", en:"Queen of Wands",      num:"后",   suit:"權杖"},
+  {name:"權杖國王", en:"King of Wands",       num:"王",   suit:"權杖"},
+  {name:"聖杯首牌", en:"Ace of Cups",         num:"A",    suit:"聖杯"},
+  {name:"聖杯二",   en:"Two of Cups",         num:"2",    suit:"聖杯"},
+  {name:"聖杯三",   en:"Three of Cups",       num:"3",    suit:"聖杯"},
+  {name:"聖杯四",   en:"Four of Cups",        num:"4",    suit:"聖杯"},
+  {name:"聖杯五",   en:"Five of Cups",        num:"5",    suit:"聖杯"},
+  {name:"聖杯六",   en:"Six of Cups",         num:"6",    suit:"聖杯"},
+  {name:"聖杯七",   en:"Seven of Cups",       num:"7",    suit:"聖杯"},
+  {name:"聖杯八",   en:"Eight of Cups",       num:"8",    suit:"聖杯"},
+  {name:"聖杯九",   en:"Nine of Cups",        num:"9",    suit:"聖杯"},
+  {name:"聖杯十",   en:"Ten of Cups",         num:"10",   suit:"聖杯"},
+  {name:"聖杯侍者", en:"Page of Cups",        num:"侍",   suit:"聖杯"},
+  {name:"聖杯騎士", en:"Knight of Cups",      num:"騎",   suit:"聖杯"},
+  {name:"聖杯皇后", en:"Queen of Cups",       num:"后",   suit:"聖杯"},
+  {name:"聖杯國王", en:"King of Cups",        num:"王",   suit:"聖杯"},
+  {name:"寶劍首牌", en:"Ace of Swords",       num:"A",    suit:"寶劍"},
+  {name:"寶劍二",   en:"Two of Swords",       num:"2",    suit:"寶劍"},
+  {name:"寶劍三",   en:"Three of Swords",     num:"3",    suit:"寶劍"},
+  {name:"寶劍四",   en:"Four of Swords",      num:"4",    suit:"寶劍"},
+  {name:"寶劍五",   en:"Five of Swords",      num:"5",    suit:"寶劍"},
+  {name:"寶劍六",   en:"Six of Swords",       num:"6",    suit:"寶劍"},
+  {name:"寶劍七",   en:"Seven of Swords",     num:"7",    suit:"寶劍"},
+  {name:"寶劍八",   en:"Eight of Swords",     num:"8",    suit:"寶劍"},
+  {name:"寶劍九",   en:"Nine of Swords",      num:"9",    suit:"寶劍"},
+  {name:"寶劍十",   en:"Ten of Swords",       num:"10",   suit:"寶劍"},
+  {name:"寶劍侍者", en:"Page of Swords",      num:"侍",   suit:"寶劍"},
+  {name:"寶劍騎士", en:"Knight of Swords",    num:"騎",   suit:"寶劍"},
+  {name:"寶劍皇后", en:"Queen of Swords",     num:"后",   suit:"寶劍"},
+  {name:"寶劍國王", en:"King of Swords",      num:"王",   suit:"寶劍"},
+  {name:"錢幣首牌", en:"Ace of Pentacles",    num:"A",    suit:"錢幣"},
+  {name:"錢幣二",   en:"Two of Pentacles",    num:"2",    suit:"錢幣"},
+  {name:"錢幣三",   en:"Three of Pentacles",  num:"3",    suit:"錢幣"},
+  {name:"錢幣四",   en:"Four of Pentacles",   num:"4",    suit:"錢幣"},
+  {name:"錢幣五",   en:"Five of Pentacles",   num:"5",    suit:"錢幣"},
+  {name:"錢幣六",   en:"Six of Pentacles",    num:"6",    suit:"錢幣"},
+  {name:"錢幣七",   en:"Seven of Pentacles",  num:"7",    suit:"錢幣"},
+  {name:"錢幣八",   en:"Eight of Pentacles",  num:"8",    suit:"錢幣"},
+  {name:"錢幣九",   en:"Nine of Pentacles",   num:"9",    suit:"錢幣"},
+  {name:"錢幣十",   en:"Ten of Pentacles",    num:"10",   suit:"錢幣"},
+  {name:"錢幣侍者", en:"Page of Pentacles",   num:"侍",   suit:"錢幣"},
+  {name:"錢幣騎士", en:"Knight of Pentacles", num:"騎",   suit:"錢幣"},
+  {name:"錢幣皇后", en:"Queen of Pentacles",  num:"后",   suit:"錢幣"},
+  {name:"錢幣國王", en:"King of Pentacles",   num:"王",   suit:"錢幣"},
 ];
 
-// ==============================
-// SPREAD CONFIGS
-// ==============================
-const SPREADS = {
-  3: {
-    title: "過去 · 現在 · 未來",
-    positions: ["過去", "現在", "未來"]
-  },
-  5: {
-    title: "五角星完整牌陣",
-    positions: ["處境", "挑戰", "潛意識", "建議", "結果"]
-  }
-};
-
-// ==============================
-// STATE
-// ==============================
 let selectedCount = 3;
 let drawnCards = [];
 let isDrawing = false;
 
-// ==============================
-// STARS ANIMATION
-// ==============================
+// Stars
 const canvas = document.getElementById('stars-canvas');
 const ctx = canvas.getContext('2d');
 let stars = [];
-
 function initStars() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   stars = [];
-  const count = Math.floor((canvas.width * canvas.height) / 8000);
-  for (let i = 0; i < count; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.2 + 0.2,
-      alpha: Math.random(),
-      speed: Math.random() * 0.005 + 0.002,
-      phase: Math.random() * Math.PI * 2
-    });
-  }
+  const n = Math.floor(canvas.width * canvas.height / 7000);
+  for (let i = 0; i < n; i++)
+    stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      r:Math.random()*1.1+0.2, speed:Math.random()*0.005+0.002, phase:Math.random()*Math.PI*2 });
 }
-
 function animateStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const now = Date.now() * 0.001;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const t = Date.now()*0.001;
   stars.forEach(s => {
-    const a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(now * s.speed * 10 + s.phase));
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,190,255,${a * 0.8})`;
-    ctx.fill();
+    const a = 0.2 + 0.7*(0.5+0.5*Math.sin(t*s.speed*10+s.phase));
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(200,188,255,${a})`; ctx.fill();
   });
   requestAnimationFrame(animateStars);
 }
-
-initStars();
-animateStars();
+initStars(); animateStars();
 window.addEventListener('resize', initStars);
 
-// ==============================
-// FUNCTIONS
-// ==============================
 function selectCount(n) {
   selectedCount = n;
-  document.querySelectorAll('.count-btn').forEach(b => {
-    b.classList.toggle('active', +b.dataset.count === n);
-  });
+  document.querySelectorAll('.count-btn').forEach(b =>
+    b.classList.toggle('active', +b.dataset.count === n));
 }
 
-function shuffleAndDraw(count) {
-  const indices = Array.from({length: 78}, (_, i) => i);
-  for (let i = indices.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [indices[i], indices[j]] = [indices[j], indices[i]];
+function shuffle(count) {
+  const idx = Array.from({length:78},(_,i)=>i);
+  for (let i=idx.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [idx[i],idx[j]]=[idx[j],idx[i]];
   }
-  return indices.slice(0, count).map(i => ({
-    card: TAROT[i],
-    reversed: Math.random() < 0.5
-  }));
+  return idx.slice(0,count).map(i=>({ card:TAROT[i], reversed:Math.random()<0.5 }));
 }
 
 function startDrawing() {
   if (isDrawing) return;
   isDrawing = true;
-
-  const drawBtn = document.getElementById('drawBtn');
-  drawBtn.disabled = true;
-
-  // Hide previous results
+  const btn = document.getElementById('drawBtn');
+  btn.disabled = true;
   document.getElementById('spreadContainer').classList.remove('visible');
-  document.getElementById('readingSection').classList.remove('visible');
+  document.getElementById('actionArea').classList.remove('visible');
   document.getElementById('drawingAnim').classList.add('visible');
 
-  // Shuffle & draw
-  drawnCards = shuffleAndDraw(selectedCount);
-
-  const spread = SPREADS[selectedCount];
+  drawnCards = shuffle(selectedCount);
 
   setTimeout(() => {
     document.getElementById('drawingAnim').classList.remove('visible');
-    buildSpread(spread);
-    buildReading(spread);
-
+    buildCards();
+    // Show buttons after last card flips
+    const totalDelay = 500 + (selectedCount - 1) * 1200 + 900;
     setTimeout(() => {
-      document.getElementById('readingSection').classList.add('visible');
-    }, selectedCount * 1200 + 800);
-
-    isDrawing = false;
-    drawBtn.disabled = false;
-  }, 1400);
+      document.getElementById('actionArea').classList.add('visible');
+      isDrawing = false;
+      btn.disabled = false;
+    }, totalDelay);
+  }, 1100);
 }
 
-function buildSpread(spread) {
-  const container = document.getElementById('spreadContainer');
+function buildCards() {
   const grid = document.getElementById('cardsGrid');
-  const posTagsEl = document.getElementById('positionTags');
-  const titleEl = document.getElementById('spreadTitle');
-
-  titleEl.textContent = spread.title;
   grid.innerHTML = '';
-  posTagsEl.innerHTML = '';
-  grid.className = 'cards-grid' + (selectedCount === 5 ? ' five-cards' : '');
 
-  // Position tags
-  spread.positions.forEach((pos, i) => {
-    const tag = document.createElement('div');
-    tag.className = 'position-tag';
-    tag.innerHTML = `<span>${i + 1}</span>${pos}`;
-    posTagsEl.appendChild(tag);
-  });
+  // Layout class
+  const cls = selectedCount >= 5 ? ' five-cards' : '';
+  grid.className = 'cards-grid' + cls;
 
-  // Build card slots
+  document.getElementById('spreadTitle').textContent = `抽牌結果・共 ${selectedCount} 張`;
+
   drawnCards.forEach((drawn, i) => {
+    const {card, reversed} = drawn;
+
     const slot = document.createElement('div');
     slot.className = 'card-slot';
-    slot.id = `slot-${i}`;
 
     const inner = document.createElement('div');
     inner.className = 'card-inner';
-    inner.id = `card-inner-${i}`;
+    inner.id = `ci-${i}`;
 
-    // Card Back
+    // Back face
     const back = document.createElement('div');
     back.className = 'card-face card-back';
-    back.innerHTML = `
-      <div class="card-back-design">
-        <span class="card-back-corner tl">✦</span>
-        <span class="card-back-corner tr">✦</span>
-        <span class="card-back-corner bl">✦</span>
-        <span class="card-back-corner br">✦</span>
-      </div>`;
+    back.innerHTML = `<div class="card-back-inner"></div>`;
 
-    // Card Front
+    // Front face
     const front = document.createElement('div');
-    front.className = 'card-face card-front' + (drawn.reversed ? ' reversed' : '');
-
-    const orientLabel = drawn.reversed ? '逆位' : '正位';
+    front.className = `card-face card-front${reversed?' reversed':''}`;
     front.innerHTML = `
-      <div class="card-art-wrap">
-        <span class="card-symbol">${drawn.card.symbol}</span>
-      </div>
-      <div class="card-info">
-        <span class="card-number">${drawn.card.suit} ${drawn.card.num}</span>
-        <span class="card-name">${drawn.card.name}</span>
-        <span class="card-orientation ${drawn.reversed ? 'reversed' : 'upright'}">${orientLabel}</span>
+      <div class="card-content">
+        <span class="card-suit">${card.suit}</span>
+        <span class="card-num">${card.num}</span>
+        <span class="card-name-text">${card.name}</span>
+        <span class="card-en">${card.en}</span>
+        <span class="card-orient ${reversed?'rev':'up'}">${reversed?'▽ 逆位':'△ 正位'}</span>
       </div>`;
 
     inner.appendChild(back);
     inner.appendChild(front);
     slot.appendChild(inner);
     grid.appendChild(slot);
-  });
 
-  container.classList.add('visible');
-
-  // Flip cards with delay
-  drawnCards.forEach((_, i) => {
-    const delay = 500 + i * 1200;
     setTimeout(() => {
-      const cardInner = document.getElementById(`card-inner-${i}`);
-      if (cardInner) cardInner.classList.add('flipped');
-    }, delay);
+      document.getElementById(`ci-${i}`)?.classList.add('flipped');
+    }, 500 + i * 1200);
   });
-}
 
-function buildReading(spread) {
-  const content = document.getElementById('readingContent');
-  content.innerHTML = '';
-
-  drawnCards.forEach((drawn, i) => {
-    const card = drawn.card;
-    const isRev = drawn.reversed;
-    const posLabel = spread.positions[i];
-    const meaning = isRev ? card.reversed : card.upright;
-    const timing = isRev ? card.timing_rev : card.timing_up;
-
-    const rc = document.createElement('div');
-    rc.className = 'reading-card';
-    rc.style.animationDelay = `${(i * 1200 + 800) * 0.001}s`;
-
-    rc.innerHTML = `
-      <div class="reading-card-header">
-        <div class="reading-card-icon ${isRev ? 'rev' : ''}">
-          <div style="font-size:1.3rem;${isRev ? 'transform:rotate(180deg)' : ''}">${card.symbol}</div>
-          <div class="reading-card-icon-name">${card.name}</div>
-        </div>
-        <div class="reading-card-title">
-          <span class="reading-pos-label">第 ${i + 1} 張 · ${posLabel}</span>
-          <span class="reading-card-name">${card.name}</span>
-          <span class="reading-card-orient ${isRev ? 'reversed' : 'upright'}">${isRev ? '▽ 逆位' : '△ 正位'} · ${card.suit} ${card.num}</span>
-        </div>
-      </div>
-      <div class="reading-text">${meaning}</div>
-      <div class="reading-timing">
-        <span class="reading-timing-label">⏳ 適用時機</span>
-        <div class="reading-timing-text">${timing}</div>
-      </div>`;
-
-    content.appendChild(rc);
-  });
+  document.getElementById('spreadContainer').classList.add('visible');
 }
 
 function copyResult() {
   const question = document.getElementById('question').value.trim();
-  const spread = SPREADS[selectedCount];
-  let text = '【塔羅占卜結果】\n';
-  text += '═══════════════════\n';
-  if (question) text += `✦ 問題：${question}\n`;
-  text += `✦ 牌陣：${spread.title}\n`;
-  text += '═══════════════════\n\n';
-
+  let text = '';
+  if (question) text += `問題：${question}\n\n`;
+  text += `抽牌結果（共 ${selectedCount} 張）：\n`;
+  text += '─────────────────\n';
   drawnCards.forEach((drawn, i) => {
-    const card = drawn.card;
-    const isRev = drawn.reversed;
-    const pos = spread.positions[i];
-    const meaning = isRev ? card.reversed : card.upright;
-    const timing = isRev ? card.timing_rev : card.timing_up;
-
-    text += `【第 ${i + 1} 張 · ${pos}】\n`;
-    text += `${card.name}（${card.suit} ${card.num}）${isRev ? ' ▽ 逆位' : ' △ 正位'}\n`;
-    text += `${meaning}\n`;
-    text += `⏳ 適用時機：${timing}\n\n`;
+    const {card, reversed} = drawn;
+    text += `${i+1}. ${card.name}（${card.en}）${reversed?'【逆位】':'【正位】'}\n`;
   });
+  text += '─────────────────\n';
+  text += '請幫我解讀以上塔羅牌陣。';
 
-  text += '═══════════════════\n';
-  text += '願星光引領你走向真實的自己 ✦';
-
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copyBtn');
+  const btn = document.getElementById('copyBtn');
+  const done = () => {
     btn.classList.add('copied');
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 複製成功！`;
+    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 已複製！貼到 AI 解讀吧`;
     setTimeout(() => {
       btn.classList.remove('copied');
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一鍵複製占卜結果`;
-    }, 2500);
-  }).catch(() => {
-    // Fallback
+      btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 複製問題 ＋ 抽牌結果`;
+    }, 2800);
+  };
+  navigator.clipboard.writeText(text).then(done).catch(() => {
     const el = document.createElement('textarea');
-    el.value = text;
-    el.style.position = 'fixed';
-    el.style.opacity = '0';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    const btn = document.getElementById('copyBtn');
-    btn.classList.add('copied');
-    btn.textContent = '✓ 複製成功！';
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 一鍵複製占卜結果`;
-    }, 2500);
+    el.value = text; el.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el);
+    done();
   });
 }
 
 function resetAll() {
+  drawnCards = [];
   document.getElementById('question').value = '';
   document.getElementById('spreadContainer').classList.remove('visible');
-  document.getElementById('readingSection').classList.remove('visible');
-  drawnCards = [];
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('actionArea').classList.remove('visible');
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 </script>
 </body>
