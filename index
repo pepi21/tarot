@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>塔羅抽牌系統</title>
+  <style>
+    :root{
+      --bg1:#0f1020;
+      --bg2:#1b1f3a;
+      --text:#e9ecff;
+      --muted:#b9bfdc;
+      --accent:#b89b5e;
+      --shadow: 0 14px 40px rgba(0,0,0,.28);
+    }
+
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(184,155,94,.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(127,109,242,.18), transparent 25%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+    }
+
+    .app{
+      width:100%;
+      max-width:1040px;
+      padding:20px 16px 28px;
+    }
+
+    .hero,
+    .panel{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      background:rgba(255,255,255,.05);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero{
+      padding:18px 16px 14px;
+    }
+
+    .title{
+      margin:0 0 6px;
+      font-size:clamp(24px,5vw,38px);
+      letter-spacing:2px;
+      font-weight:800;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .questionBox{
+      margin-top:14px;
+      display:grid;
+      gap:10px;
+    }
+
+    .questionLabel{
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+    }
+
+    .questionInput{
+      width:100%;
+      min-height:96px;
+      resize:vertical;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      padding:14px;
+      font-size:15px;
+      line-height:1.6;
+      outline:none;
+    }
+
+    .questionInput::placeholder{
+      color:rgba(233,236,255,.55);
+    }
+
+    .controls{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .btn{
+      border:none;
+      border-radius:16px;
+      padding:14px 12px;
+      font-size:16px;
+      font-weight:700;
+      color:#111;
+      background:linear-gradient(135deg,#f5e7c4,#d8b36d);
+      box-shadow:0 10px 22px rgba(0,0,0,.20);
+      cursor:pointer;
+      transition:transform .15s ease, filter .15s ease;
+      touch-action:manipulation;
+    }
+
+    .btn:active{
+      transform:scale(.98);
+      filter:brightness(.96);
+    }
+
+    .btn.secondary{
+      background:linear-gradient(135deg,#dbe0ff,#a9b2ff);
+    }
+
+    .btn.ghost{
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:none;
+    }
+
+    .panel{
+      margin-top:16px;
+      padding:16px;
+    }
+
+    .status{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .deckInfo{
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .hint{
+      margin:0 0 14px;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .resultTitle{
+      font-size:18px;
+      font-weight:800;
+      margin:0 0 12px;
+      color:#fff;
+      letter-spacing:1px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(1,1fr);
+      gap:14px;
+    }
+
+    .tarot-card{
+      display:flex;
+      gap:14px;
+      align-items:stretch;
+      padding:14px;
+      border-radius:20px;
+      background:rgba(255,255,255,.92);
+      color:#1b1b25;
+      box-shadow:0 14px 30px rgba(0,0,0,.22);
+      border:1px solid rgba(0,0,0,.04);
+    }
+
+    .card-face{
+      width:92px;
+      min-width:92px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#fefefe,#f3efde);
+      border:1px solid rgba(0,0,0,.07);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      text-align:center;
+      padding:10px 8px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card-face::before{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(184,155,94,.18), transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(127,109,242,.16), transparent 30%);
+      transform:rotate(8deg);
+    }
+
+    .symbol{
+      position:relative;
+      font-size:26px;
+      font-weight:900;
+      color:var(--accent);
+      line-height:1;
+      margin-bottom:4px;
+    }
+
+    .arcana{
+      position:relative;
+      font-size:12px;
+      font-weight:700;
+      color:#5f5b50;
+    }
+
+    .card-content{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
+      min-width:0;
+    }
+
+    .card-name{
+      font-size:18px;
+      font-weight:900;
+      margin:0;
+      line-height:1.25;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.5px;
+      background:#f2f3ff;
+      color:#3e3e6a;
+      border:1px solid #e3e6ff;
+    }
+
+    .tag.gold{
+      background:#fff5dc;
+      color:#8a6418;
+      border-color:#f1ddb1;
+    }
+
+    .tag.red{
+      background:#ffecec;
+      color:#9d2f2f;
+      border-color:#ffd2d2;
+    }
+
+    .desc{
+      margin:0;
+      color:#33354d;
+      font-size:14px;
+      line-height:1.65;
+      white-space:pre-line;
+    }
+
+    .history{
+      margin-top:14px;
+      display:grid;
+      gap:10px;
+    }
+
+    .historyItem{
+      padding:12px 14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--text);
+      font-size:14px;
+      line-height:1.6;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .historyItem span{
+      color:var(--muted);
+    }
+
+    .empty{
+      padding:20px 14px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      color:var(--muted);
+      text-align:center;
+      line-height:1.7;
+      background:rgba(255,255,255,.03);
+    }
+
+    .footerNote{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    @media (min-width:700px){
+      .controls{
+        grid-template-columns:repeat(5,1fr);
+      }
+      .grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (min-width:920px){
+      .grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="hero">
+      <h1 class="title">塔羅抽牌系統</h1>
+      <p class="subtitle">78 張完整牌組，隨機抽取正位或逆位。介面已針對手機閱讀優化。</p>
+
+      <div class="questionBox">
+        <label class="questionLabel" for="questionInput">請輸入你的問題</label>
+        <textarea
+          id="questionInput"
+          class="questionInput"
+          placeholder="例如：我目前這段感情的發展方向是什麼？"
+        ></textarea>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="draw1">抽 1 張</button>
+        <button class="btn secondary" id="draw3">抽 3 張</button>
+        <button class="btn secondary" id="draw5">抽 5 張</button>
+        <button class="btn ghost" id="shuffleBtn">重新洗牌</button>
+        <button class="btn ghost" id="resetBtn">清空結果</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="status">
+        <div class="deckInfo">牌組狀態：<strong id="deckCount">78</strong> 張剩餘</div>
+        <div class="deckInfo">抽牌模式：<strong>隨機正逆位</strong></div>
+      </div>
+
+      <div class="hint">
+        <strong>使用張數建議：</strong><br>
+        1 張：單一問題、今日指引、當下核心。<br>
+        3 張：適合快速看整體走向。<br>
+        5 張：適合較完整的問題，能看出更多層次。<br>
+        不預設牌陣時，AI 會以整體方式解讀所有牌。
+      </div>
+
+      <h2 class="resultTitle">抽牌結果</h2>
+      <div id="resultArea" class="grid">
+        <div class="empty">
+          尚未抽牌。<br>
+          先輸入問題，再點擊「抽 1 張」、「抽 3 張」或「抽 5 張」開始。
+        </div>
+      </div>
+
+      <div class="controls" style="margin-top:14px;">
+        <button class="btn" id="copyBtn">複製 AI 解讀格式</button>
+      </div>
+
+      <div class="history" id="historyArea"></div>
+      <div class="footerNote">每張牌都會從剩餘牌堆中抽出，不重複。重新洗牌後會回到完整 78 張。</div>
+    </div>
+  </div>
+
+  <script>
+    const majorArcana = [
+      { name: "愚者", number: 0, element: "風", type: "大阿爾克那" },
+      { name: "魔術師", number: 1, element: "風", type: "大阿爾克那" },
+      { name: "女祭司", number: 2, element: "水", type: "大阿爾克那" },
+      { name: "皇后", number: 3, element: "土", type: "大阿爾克那" },
+      { name: "皇帝", number: 4, element: "火", type: "大阿爾克那" },
+      { name: "教皇", number: 5, element: "土", type: "大阿爾克那" },
+      { name: "戀人", number: 6, element: "風", type: "大阿爾克那" },
+      { name: "戰車", number: 7, element: "水", type: "大阿爾克那" },
+      { name: "力量", number: 8, element: "火", type: "大阿爾克那" },
+      { name: "隱者", number: 9, element: "土", type: "大阿爾克那" },
+      { name: "命運之輪", number: 10, element: "火", type: "大阿爾克那" },
+      { name: "正義", number: 11, element: "風", type: "大阿爾克那" },
+      { name: "倒吊人", number: 12, element: "水", type: "大阿爾克那" },
+      { name: "死神", number: 13, element: "水", type: "大阿爾克那" },
+      { name: "節制", number: 14, element: "火", type: "大阿爾克那" },
+      { name: "惡魔", number: 15, element: "土", type: "大阿爾克那" },
+      { name: "高塔", number: 16, element: "火", type: "大阿爾克那" },
+      { name: "星星", number: 17, element: "風", type: "大阿爾克那" },
+      { name: "月亮", number: 18, element: "水", type: "大阿爾克那" },
+      { name: "太陽", number: 19, element: "火", type: "大阿爾克那" },
+      { name: "審判", number: 20, element: "火", type: "大阿爾克那" },
+      { name: "世界", number: 21, element: "土", type: "大阿爾克那" }
+    ];
+
+    const suits = [
+      { suit: "權杖", element: "火" },
+      { suit: "聖杯", element: "水" },
+      { suit: "寶劍", element: "風" },
+      { suit: "錢幣", element: "土" }
+    ];
+
+    const ranks = [
+      { label: "一", short: "Ace" },
+      { label: "二" }, { label: "三" }, { label: "四" }, { label: "五" },
+      { label: "六" }, { label: "七" }, { label: "八" }, { label: "九" }, { label: "十" },
+      { label: "侍從", short: "Page" },
+      { label: "騎士", short: "Knight" },
+      { label: "皇后", short: "Queen" },
+      { label: "國王", short: "King" }
+    ];
+
+    let deck = [];
+    let history = [];
+    let lastDrawn = [];
+
+    const resultArea = document.getElementById("resultArea");
+    const historyArea = document.getElementById("historyArea");
+    const deckCount = document.getElementById("deckCount");
+    const questionInput = document.getElementById("questionInput");
+
+    function buildDeck() {
+      const cards = [];
+
+      majorArcana.forEach(card => {
+        cards.push({
+          id: `M${card.number}`,
+          name: card.name,
+          type: card.type,
+          element: card.element,
+          rankText: `大阿爾克那 ${String(card.number).padStart(2, "0")}`
+        });
+      });
+
+      suits.forEach(s => {
+        ranks.forEach(r => {
+          const label = r.short ? `${r.short}` : r.label;
+          const display = r.short ? `${s.suit} ${r.short}` : `${s.suit}${r.label}`;
+
+          cards.push({
+            id: `${s.suit}-${label}`,
+            name: display,
+            type: "小阿爾克那",
+            element: s.element,
+            rankText: `${s.suit} · ${r.short || r.label}`
+          });
+        });
+      });
+
+      return cards;
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function initDeck() {
+      deck = shuffle(buildDeck());
+      deckCount.textContent = deck.length;
+    }
+
+    function drawCards(count) {
+      if (deck.length === 0) {
+        alert("牌堆已抽完，請先重新洗牌。");
+        return [];
+      }
+
+      const drawn = [];
+      const n = Math.min(count, deck.length);
+
+      for (let i = 0; i < n; i++) {
+        const card = deck.shift();
+        const reversed = Math.random() < 0.5;
+        drawn.push({
+          ...card,
+          orientation: reversed ? "逆位" : "正位",
+          reversed
+        });
+      }
+
+      deckCount.textContent = deck.length;
+      return drawn;
+    }
+
+    function meaningText(card) {
+      const base = card.type === "大阿爾克那"
+        ? "關鍵主題、人生課題、外在推動力。"
+        : "具體事件、行動方式、日常層面。";
+
+      return `${base}\n元素：${card.element}`;
+    }
+
+    function cardSymbol(card) {
+      if (card.type === "大阿爾克那") return "✦";
+      if (card.name.includes("權杖")) return "♈";
+      if (card.name.includes("聖杯")) return "♋";
+      if (card.name.includes("寶劍")) return "♎";
+      if (card.name.includes("錢幣")) return "♑";
+      return "✧";
+    }
+
+    function getQuestionText() {
+      const q = questionInput.value.trim();
+      return q || "（未填入問題）";
+    }
+
+    function getLastAnswerText() {
+      if (!lastDrawn.length) return "尚未抽牌。";
+
+      return lastDrawn.map((card, idx) => {
+        return `${idx + 1}. ${card.name}（${card.orientation}｜${card.type}｜${card.element}元素）`;
+      }).join("\n");
+    }
+
+    function buildAIText() {
+      return [
+        "【問題】",
+        getQuestionText(),
+        "",
+        "【抽到的牌】",
+        getLastAnswerText(),
+        "",
+        "【解讀要求】",
+        "請將所有牌一起整體解讀，不要逐張分開解釋",
+        "請依照元素（火、土、風、水）分析能量分布",
+        "請特別強調大阿爾克那的影響",
+        "請直接回答問題，不要延伸無關情境",
+        "請給出明確結論與建議"
+      ].join("\n");
+    }
+
+    function renderResults(cards) {
+      lastDrawn = cards;
+
+      if (!cards.length) {
+        resultArea.innerHTML = `
+          <div class="empty">
+            尚未抽牌。<br>
+            先輸入問題，再點擊「抽 1 張」、「抽 3 張」或「抽 5 張」開始。
+          </div>
+        `;
+        return;
+      }
+
+      resultArea.innerHTML = cards.map((card, index) => `
+        <div class="tarot-card">
+          <div class="card-face">
+            <div class="symbol">${cardSymbol(card)}</div>
+            <div class="arcana">${card.rankText}</div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-name">${index + 1}. ${card.name}</h3>
+            <div class="meta">
+              <span class="tag gold">${card.type}</span>
+              <span class="tag">${card.element}元素</span>
+              <span class="tag ${card.orientation === "逆位" ? "red" : ""}">${card.orientation}</span>
+            </div>
+            <p class="desc">${meaningText(card)}</p>
+          </div>
+        </div>
+      `).join("");
+
+      history.unshift({
+        time: new Date().toLocaleString("zh-Hant-TW", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        }),
+        question: getQuestionText(),
+        cards: cards.map(c => `${c.name}（${c.orientation}）`).join("、")
+      });
+
+      renderHistory();
+    }
+
+    function renderHistory() {
+      if (!history.length) {
+        historyArea.innerHTML = "";
+        return;
+      }
+
+      historyArea.innerHTML = history.slice(0, 5).map(item => `
+        <div class="historyItem">
+          <div>
+            <div>問題：${item.question}</div>
+            <div>結果：${item.cards}</div>
+          </div>
+          <span>${item.time}</span>
+        </div>
+      `).join("");
+    }
+
+    async function copyQuestionAndAnswer() {
+      const text = buildAIText();
+
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("已複製 AI 解讀格式");
+      } catch (err) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        alert("已複製 AI 解讀格式");
+      }
+    }
+
+    document.getElementById("draw1").addEventListener("click", () => {
+      const cards = drawCards(1);
+      renderResults(cards);
+    });
+
+    document.getElementById("draw3").addEventListener("click", () => {
+      const cards = drawCards(3);
+      renderResults(cards);
+    });
+
+    document.getElementById("draw5").addEventListener("click", () => {
+      const cards = drawCards(5);
+      renderResults(cards);
+    });
+
+    document.getElementById("shuffleBtn").addEventListener("click", () => {
+      initDeck();
+      history = [];
+      lastDrawn = [];
+      renderResults([]);
+      renderHistory();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      history = [];
+      lastDrawn = [];
+      renderResults([]);
+      renderHistory();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", copyQuestionAndAnswer);
+
+    initDeck();
+    renderResults([]);
+    renderHistory();
+  </script>
+</body>
+</html>
